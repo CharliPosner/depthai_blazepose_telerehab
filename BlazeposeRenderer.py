@@ -101,17 +101,17 @@ class BlazeposeRenderer:
                         (20, h-60), 
                         cv2.FONT_HERSHEY_PLAIN, 2, (255,255,0), 2)
 
-        if self.show_xyz and body.xyz_ref:
-            x0, y0 = body.xyz_ref_coords_pixel.astype(np.int)
-            x0 -= 50
-            y0 += 40
-            cv2.rectangle(self.frame, (x0,y0), (x0+100, y0+85), (220,220,240), -1)
-            cv2.putText(self.frame, f"X:{body.xyz[0]/10:3.0f} cm", (x0+10, y0+20), cv2.FONT_HERSHEY_PLAIN, 1, (20,180,0), 2)
-            cv2.putText(self.frame, f"Y:{body.xyz[1]/10:3.0f} cm", (x0+10, y0+45), cv2.FONT_HERSHEY_PLAIN, 1, (255,0,0), 2)
-            cv2.putText(self.frame, f"Z:{body.xyz[2]/10:3.0f} cm", (x0+10, y0+70), cv2.FONT_HERSHEY_PLAIN, 1, (0,0,255), 2)
-        if self.show_xyz_zone and body.xyz_ref:
-            # Show zone on which the spatial data were calculated
-            cv2.rectangle(self.frame, tuple(body.xyz_zone[0:2]), tuple(body.xyz_zone[2:4]), (180,0,180), 2)
+        # if self.show_xyz and body.xyz_ref:
+        #     x0, y0 = body.xyz_ref_coords_pixel.astype(int)
+        #     x0 -= 50
+        #     y0 += 40
+        #     cv2.rectangle(self.frame, (x0,y0), (x0+100, y0+85), (220,220,240), -1)
+        #     cv2.putText(self.frame, f"X:{body.xyz[0]/10:3.0f} cm", (x0+10, y0+20), cv2.FONT_HERSHEY_PLAIN, 1, (20,180,0), 2)
+        #     cv2.putText(self.frame, f"Y:{body.xyz[1]/10:3.0f} cm", (x0+10, y0+45), cv2.FONT_HERSHEY_PLAIN, 1, (255,0,0), 2)
+        #     cv2.putText(self.frame, f"Z:{body.xyz[2]/10:3.0f} cm", (x0+10, y0+70), cv2.FONT_HERSHEY_PLAIN, 1, (0,0,255), 2)
+        # if self.show_xyz_zone and body.xyz_ref:
+        #     # Show zone on which the spatial data were calculated
+        #     cv2.rectangle(self.frame, tuple(body.xyz_zone[0:2]), tuple(body.xyz_zone[2:4]), (180,0,180), 2)
 
     def draw_3d(self, body):
         self.vis3d.clear()
@@ -147,6 +147,7 @@ class BlazeposeRenderer:
                     a, b = a_b
                     if self.is_present(body, a) and self.is_present(body, b):
                             self.vis3d.add_segment(points[a], points[b], color=colors[i])
+                            ## WRITE a AND b COORDS TO SCREEN
         self.vis3d.render()
                 
         
